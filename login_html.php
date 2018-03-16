@@ -19,7 +19,6 @@
           req.onload=function ()
           {
              var res=this.responseText;
-             alert(res);
              if(res=="username")
                alert("username does not exists");
              if(res=="password")
