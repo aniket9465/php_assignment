@@ -33,8 +33,9 @@ mobile number : <?php echo $result["mobile"];?>
 <p>cover:</p>
 <img src="<?php echo $result['cover'];?>"  />
 </div>
-<a href="./change_profile_html.php"><button> change profile</button></a>
-<a href="./change_username_html.php"><button> change username </button></a>
-<a href="./change_cover_html.php"><button> change cover </button></a>
+<a href="./change_profile_html.php"><button> change profile picture</button></a>
+<a href="./change_cover_html.php"><button> change cover picture </button></a>
+<a href="./edit_profile_html.php"><button> edit profile</button></a>
+<a href="./change_password_html.php"><button> change password</button></a>
 </body>
 </html>

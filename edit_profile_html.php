@@ -1,53 +1,57 @@
+<?php
+session_start();
+ try
+   {
+         $conn=new PDO("mysql:host=192.168.121.187;dbname=first_year_db","first_year","first_year");
+         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         $params=array(":username"=>$_SESSION["username"]);
+         $result=$conn->prepare('select * from  aniket_php_profiles where username=:username');
+         $result->execute($params);
+         $result=($result->fetch());
+    }
+  catch(Exception $e)
+    {
+      echo $e;
+    }
+
+
+?>
 <!DOCTYPE html>
 <html>
  <head>
  </head>
  <body>
-   <form method="post"  enctype="multipart/form-data"  action="http://192.168.121.187:8001/php_assign/aniket/signup_php.php" id="form" onsubmit="return validateForm()" >
+   <form method="post"  enctype="multipart/form-data"  action="http://192.168.121.187:8001/php_assign/aniket/edit_profile_php.php" id="form" onsubmit="return validateForm()" >
      <div style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
      <p>Name :
-     <input type="text" name="name">
-     </p>
-     <p>User name :
-     <input type="uname" id="uname" name="uname">
-     <div style="color: red;visibility: hidden" id="uname1">
-      username used.
-     </div>
+     <input type="text" value="<?php echo $result["name"] ?>"  name="name">
      </p>
      <p>
      Email :
-        <input type="email" id="email" name="email">
+        <input type="email" id="email"  value="<?php echo $result["email"] ?>"  name="email">
           <div style="color: red;visibility: hidden" id="nomail">
           Enter a valid email
           </div>
      </p>
      <p>Phone number :
-     <input type="text" name="number" id="number" pattern="[0-9]{10}">
+     <input type="text" name="number" id="number"  value="<?php echo $result["mobile"] ?>"   pattern="[0-9]{10}">
      <div style="color: red;visibility: hidden" id="nonumber">
      Enter a valid phone number
      </div>
-                                                                                                          </p>
-                                                                                                          <p>Gender :
-     <input type="radio" id="m"  name="gender" value="0">
+     </p>
+     <p>Gender :
+    <input type="radio" name="gender" value="0" <?php   if($result["gender"]=="0") echo 'checked="checked"  ;'   ?> >
      Male
-     <input type="radio"id="f"  name="gender" value="1">
+     <input type="radio" name="gender" value="1" <?php   if($result["gender"]=="1") echo 'checked="checked"' ;    ?> >
      Female
-                                                                                                           </p>
+     </p>
 
-                                                                                                           <p>Password :
-                                                                                                           <input type="password" name="password" id="pass" >
-                                                                                                           </p>
-                                                                                                           <p>Re_Password :
-      <input type="password" name="Re_Password" id="repass"> 
-      <div style="color: red;visibility: hidden" id="nomatch">
-      Password and Re_Password should match
-      </div>
        <input type="submit" name="submit">
        </div>
        </form>
        <script>
-       var a=0,b=0;
-       function validateForm() {
+       var a=1,b=1;
+       function validateForm() {console.log(a);
              var x = document.forms["form"]["name"].value;
                  if (x == "") {
                            alert("Name must be filled out");
@@ -67,8 +71,8 @@
                                   if (x == "") {
                               alert("email must be filled out");
                                  return false;
-                                                                                                                                         }
-                 var x = document.forms["form"]["uname"].value;
+                              }
+                /* var x = document.forms["form"]["uname"].value;
                  if (x == "") {
                              alert("username must be filled out");
                                      return false;}
@@ -76,18 +80,19 @@
                                   if (x == "") {
                                         alert("password must be filled out");
                                            return false;
-                                                                                                                                      }
+                                           }*/
 
-       if(a==0||b==0)return false;
+       if(a==0)return false;
+       console.log("call");
        return true;
        }
-                                                                                                               function compare(){
+              /*                                                                                                 function compare(){
                                                                                                                 console.log(document.getElementById("nomatch").visibility);
                                                                                                                                                                                                                      if(document.getElementById("pass").value!=document.getElementById("repass").value)
                                                                                                                                                                                                                      {a=0;                                                                                                      document.getElementById("nomatch").style.visibility="visible";
                                                                                                                }else
                                                                                                                                                                                                                       { a=1;                                                                                                                                                                                                       document.getElementById("nomatch").style.visibility="hidden";
-                                                                                                                                                                                                                      }}
+                       }}*/
             function compare1(){
               if(!RegExp(/^(\+91|0){0,1}[987]{1}[0-9]{9}$/).test(document.getElementById("number").value))
               { document.getElementById("nonumber").style.visibility="visible";a=0;}
@@ -100,12 +105,12 @@
             else
             {document.getElementById("nomail").style.visibility="hidden";a=1;}
             }
-             document.getElementById("pass").addEventListener('change', function f(){compare();});
-             document.getElementById("repass").addEventListener('change', function f(){compare();});
+            // document.getElementById("pass").addEventListener('change', function f(){compare();});
+            // document.getElementById("repass").addEventListener('change', function f(){compare();});
              document.getElementById("number").addEventListener('change', function f(){compare1();});
              document.getElementById("email").addEventListener('change', function f(){compare2();});
-             document.getElementById("uname").addEventListener('change', function f(){myFunction();});
-            function myFunction()
+            // document.getElementById("uname").addEventListener('change', function f(){myFunction();});
+           /* function myFunction()
        {
           console.log("function called");
           event.preventDefault();
@@ -124,7 +129,7 @@
            }
           var json=JSON.stringify({'username' : form.uname.value , 'password' : form.pass.value}); console.log(json);
           req.send(json);
-       }
+       }*/
 
 
 </script>
