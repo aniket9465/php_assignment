@@ -14,7 +14,7 @@
           event.preventDefault();
           var form=document.getElementById("form");
           var req=new XMLHttpRequest();
-          req.open("POST","http://192.168.121.187:8001/php_assign/aniket/login.php",true);
+          req.open("POST","http://192.168.121.187:8001/php_assign/aniket/login_php.php",true);
           req.setRequestHeader("Content-Type","application/json");
           req.onload=function ()
           {
