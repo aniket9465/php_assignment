@@ -37,5 +37,7 @@ mobile number : <?php echo $result["mobile"];?>
 <a href="./change_cover_html.php"><button> change cover picture </button></a>
 <a href="./edit_profile_html.php"><button> edit profile</button></a>
 <a href="./change_password_html.php"><button> change password</button></a>
+<a href="./add_feed_html.php"><button>add feed</button></a>
+<a href="./common_feed.php"><button> common feed </button></a>
 </body>
 </html>

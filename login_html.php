@@ -1,9 +1,9 @@
-<DOCTYPE html>
+<!DOCTYPE html>
 <html>
 <body>
     <form  id="form" onsubmit="myFunction()">
        Enter username: <input type="text" name="name">
-       Enter password: <input type="text" name="pass">
+       Enter password: <input type="password" name="pass">
        <input type="submit" value="Submit">
     </form>
 
