@@ -1,4 +1,5 @@
 <?php
+  session_start();
   $data = file_get_contents("php://input");
   $obj = json_decode($data, true);
   try
@@ -18,7 +19,7 @@
          else
          {
            if($num_rows1==1)
-             echo "ok";
+           { echo "ok";$_SESSION["username"]=$obj["username"];}
            else
              echo "password";
          }
