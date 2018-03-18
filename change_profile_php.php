@@ -1,5 +1,21 @@
 <?php
 session_start();
+error_reporting(E_ERROR | E_PARSE);
+if(isset($_COOKIE["remember_me"]))
+if($_COOKIE["remember_me"]!="nocookie")
+{
+      $_SESSION["username"]=$_COOKIE["remember_me"];
+}
+try{
+  if($_SESSION["username"]=="")
+  {header("location:http://192.168.121.187:8001/php_assign/aniket/index.php");
+    die();}
+}
+catch(Exception $e){header("location:http://192.168.121.187:8001/php_assign/aniket/change_cover_html.php");
+  die();
+}
+
+
   $target_dir = "./uploads/";
   $target_file = $target_dir . basename($_FILES["fileToUpload1"]["name"]);
   $uploadOk = 1;

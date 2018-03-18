@@ -1,4 +1,12 @@
 <?php
+session_start();
+if(isset($_COOKIE["remember_me"]))
+if($_COOKIE["remember_me"]!="nocookie")
+{
+$_SESSION["username"]=$_COOKIE["remember_me"];
+ header("Location: http://192.168.121.187:8001/php_assign/aniket/profile_php.php");
+                      die();
+}
   session_start();
   $data = file_get_contents("php://input");
   $obj = json_decode($data, true);
@@ -22,10 +30,14 @@
          {
            if($num_rows1==1)
            { echo "ok";$_SESSION["username"]=$_REQUEST["username"];
+             if($_REQUEST["remember"]=="on"){ setcookie("remember_me", $_REQUEST["username"], time() + (86400 * 30), "/","192.168.121.187");  }
+             else
+               {
+               setcookie("remember_me","nocookie", time() + (86400 * 30), "/","192.168.121.187");
+            }
             header("Location: http://192.168.121.187:8001/php_assign/aniket/profile_php.php");
                      die();
-           }
-           else
+           }else
            { header("Location: http://192.168.121.187:8001/php_assign/aniket/login_php.php");
                                 die();
            }

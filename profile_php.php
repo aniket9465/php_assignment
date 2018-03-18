@@ -1,5 +1,12 @@
 <?php
 session_start();
+error_reporting(E_ERROR | E_PARSE);
+if(isset($_COOKIE["remember_me"]))
+if($_COOKIE["remember_me"]!="nocookie")
+{
+    $_SESSION["username"]=$_COOKIE["remember_me"];
+}
+
  try
    {
          $conn=new PDO("mysql:host=192.168.121.187;dbname=first_year_db","first_year","first_year");
@@ -39,5 +46,6 @@ mobile number : <?php echo $result["mobile"];?>
 <a href="./change_password_html.php"><button> change password</button></a>
 <a href="./add_feed_html.php"><button>add feed</button></a>
 <a href="./common_feed.php"><button> common feed </button></a>
+<a href="./logout.php"><button>logout</button></a>
 </body>
 </html>
