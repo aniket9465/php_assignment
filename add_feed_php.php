@@ -13,6 +13,7 @@ session_start();
     {
       echo $e;
     }
-
+header("location: http://192.168.121.187:8001/php_assign/aniket/common_feed.php");
+exit();
 ?>
 

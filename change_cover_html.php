@@ -33,7 +33,7 @@ function check(e) {
         alert('Max Upload size is 1MB only');
         document.getElementById("fileToUpload1").value = '';
          e.preventDefault();return;
-}
+    }}
 </script>
 </body>
 </html>

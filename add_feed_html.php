@@ -12,17 +12,17 @@
 <script>
 function required()
 {
-var empt = document.forms["form1"]["text1"].value;
+var empt = document.forms["form"]["text1"].value;
 if (empt == "")
 {
 event.preventDefault();
 alert("Please input a Value");
 return false;
 }
-else 
+else
 {
 alert('Code has accepted : you can try another');
-return true; 
+return true;
 }
 }
 </script>

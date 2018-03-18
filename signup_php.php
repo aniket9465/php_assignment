@@ -8,10 +8,15 @@ echo var_dump($_REQUEST);
          $params=array(":name" => $_REQUEST["name"],":username"=>$_REQUEST["uname"],":email"=>$_REQUEST["email"],":password"=>$_REQUEST["password"],":number"=>$_REQUEST["number"],":gender"=>$_REQUEST["gender"]);
          $result=$conn->prepare('insert into aniket_php_profiles values(:username,:password,:name,:number,:email,:gender,NULL,NULL)');
          $result->execute($params);
-    }
+        $_SESSION["username"]=$_REQUEST["uname"];
+        header("location:http://192.168.121.187:8001/php_assign/aniket/profile_php.php");
+        exit();
+   }
   catch(Exception $e)
     {
       echo $e;
     }
+header("location:http://192.168.121.187:8001/php_assign/aniket/signup_html.php");
+        exit();
 
 ?>

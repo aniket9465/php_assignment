@@ -20,10 +20,10 @@ session_start();
 <body>
 <div style="display : flex;flex-direction:column">
 <p>
-name : <?php echo $result["name"];?>
+name : <?php echo htmlspecialchars($result["name"]);?>
 </p>
 <p>
-username : <?php echo $result["username"];?>
+username : <?php echo htmlspecialchars($result["username"]);?>
 </p>
 <p>
 mobile number : <?php echo $result["mobile"];?>

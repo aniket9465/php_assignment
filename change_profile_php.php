@@ -47,6 +47,8 @@ if ($uploadOk == 0) {
          $params=array(":profile" => $target_file_1,":username"=>$_SESSION["username"]);
          $result=$conn->prepare('update aniket_php_profiles set  profile=:profile where username=:username');
          $result->execute($params);
+         header("location:http://192.168.121.187:8001/php_assign/aniket/profile_php.php");
+         exit();
     }
   catch(Exception $e)
     {
@@ -59,4 +61,7 @@ if ($uploadOk == 0) {
                               echo $target_file;
                                   }
        }
+header("location:http://192.168.121.187:8001/php_assign/aniket/change_profile_html.php");
+         exit();
+
 ?>
