@@ -1,9 +1,35 @@
+<?php
+if($_SERVER['REQUEST_METHOD'] === 'POST')
+{
+echo var_dump($_REQUEST);
+   try
+   {
+         $conn=new PDO("mysql:host=192.168.121.187;dbname=first_year_db","first_year","first_year");
+         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         $params=array(":name" => $_REQUEST["name"],":username"=>$_REQUEST["uname"],":email"=>$_REQUEST["email"],":password"=>$_REQUEST["password"],":number"=>$_REQUEST["number"],":gender"=>$_REQUEST["gender"]);
+         $result=$conn->prepare('insert into aniket_php_profiles values(:username,:password,:name,:number,:email,:gender,NULL,NULL)');
+         $result->execute($params);
+        $_SESSION["username"]=$_REQUEST["uname"];
+        setcookie("remember_me", $_REQUEST["uname"], time() + (86400 * 30), "/","192.168.121.187");
+        header("location:http://192.168.121.187:8001/php_assign/aniket/profile_php.php");
+        exit();
+   }
+  catch(Exception $e)
+    {
+      echo $e;
+    }
+header("location:http://192.168.121.187:8001/php_assign/aniket/signup_html.php");
+        exit();
+}
+?>
+
+
 <!DOCTYPE html>
 <html>
  <head>
  </head>
  <body>
-   <form method="post"  enctype="multipart/form-data"  action="http://192.168.121.187:8001/php_assign/aniket/signup_php.php" id="form" onsubmit="return validateForm()" >
+   <form method="post"  enctype="multipart/form-data"  action="http://192.168.121.187:8001/php_assign/aniket/signup_html.php" id="form" onsubmit="return validateForm()" >
      <div style="display: flex;flex-direction: column;align-items: center;justify-content: center;">
      <p>Name :
      <input type="text" name="name">
