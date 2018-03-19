@@ -4,6 +4,27 @@ if($_SERVER['REQUEST_METHOD'] === 'POST')
 echo var_dump($_REQUEST);
    try
    {
+        $v=1;
+        if(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$_REQUEST["email"]))
+         { $v=0;echo "5";}
+        if(!preg_match("/^(\+91|0){0,1}[987]{1}[0-9]{9}$/",$_REQUEST["number"]))
+         { $v=0;echo "4";}
+         $conn=new PDO("mysql:host=192.168.121.187;dbname=first_year_db","first_year","first_year");
+         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         $params=array(":username" => $_REQUEST["uname"]);
+         $result=$conn->prepare('select * from aniket_php_profiles where username= :username');
+         $result->execute($params);
+         $num_rows = $result->rowCount();
+         if($num_rows==1)
+          {echo "3"; $v=0;}
+        if(!$_REQUEST["password"])
+         {echo "2";$v=0;}
+        if(!$_REQUEST["name"])
+            {    echo "1";    $v=0;}
+if($v==0){
+header("location:http://192.168.121.187:8001/php_assign/aniket/signup_html.php");
+        exit();}
+
          $conn=new PDO("mysql:host=192.168.121.187;dbname=first_year_db","first_year","first_year");
          $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
          $params=array(":name" => $_REQUEST["name"],":username"=>$_REQUEST["uname"],":email"=>$_REQUEST["email"],":password"=>$_REQUEST["password"],":number"=>$_REQUEST["number"],":gender"=>$_REQUEST["gender"]);

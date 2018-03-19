@@ -1,5 +1,11 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
+    if(isset($_COOKIE["remember_me"]))
+      if($_COOKIE["remember_me"]!="nocookie")
+      {
+        $_SESSION["username"]=$_COOKIE["remember_me"];
+      }
+$q=1;
   session_start();
   $target_dir = "./uploads/";
   $target_file = $target_dir . basename($_FILES["fileToUpload1"]["name"]);
@@ -41,7 +47,7 @@ if ($uploadOk == 0) {
       $target_file_1=$target_file;
       if (move_uploaded_file($_FILES["fileToUpload1"]["tmp_name"], $target_file)) {
                 echo "The file ". basename( $_FILES["fileToUpload1"]["name"]). " has been uploaded.";
-                    } else {
+               $q=0;     } else {
                               echo "Sorry, there was an error uploading your file";
                               echo $target_file;
                                   }
@@ -73,6 +79,9 @@ if ($_FILES["fileToUpload"]["size"] > 500000) {
           $uploadOk = 0;
 }*/
 // Allow certain file formats
+if($q==1)
+{header("location: http://192.168.121.187:8001/php_assign/aniket/complete_profile_html.php");die();}
+$q=0;
 if($imageFileType != "jpg" && $imageFileType != "png" && $imageFileType != "jpeg"
     && $imageFileType != "gif" ) {
       echo "Sorry, only JPG, JPEG, PNG & GIF files are allowed.";
@@ -100,6 +109,7 @@ if ($uploadOk == 0) {
                     } else {
                               echo "Sorry, there was an error uploading your file";
                               echo $target_file;
+                              header("location: http://192.168.121.187:8001/php_assign/aniket/complete_profile_html.php");die();
                                   }
 }  header("location: http://192.168.121.187:8001/php_assign/aniket/profile_php.php");die();     }
 ?>
@@ -107,7 +117,7 @@ if ($uploadOk == 0) {
 
 <!DOCTYPE html>
 <html>
-<head></head>
+<head>complete profile :</head>
 <body>
   <form   action="http://192.168.121.187:8001/php_assign/aniket/complete_profile_html.php" method="post" id ="form" enctype="multipart/form-data">
     Select profile photo :

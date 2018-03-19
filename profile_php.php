@@ -15,6 +15,8 @@ if($_COOKIE["remember_me"]!="nocookie")
          $result=$conn->prepare('select * from  aniket_php_profiles where username=:username');
          $result->execute($params);
          $result=($result->fetch());
+         if(!$result['profile']){
+           header("location: http://192.168.121.187:8001/php_assign/aniket/complete_profile_html.php");die();}
     }
   catch(Exception $e)
     {
@@ -36,9 +38,9 @@ username : <?php echo htmlspecialchars($result["username"]);?>
 mobile number : <?php echo $result["mobile"];?>
 </p>
 <p>profile:</p>
-<img src="<?php echo $result['profile']; ?>"  />
+<img src="<?php echo $result['profile']; ?>" width="30%"/>
 <p>cover:</p>
-<img src="<?php echo $result['cover'];?>"  />
+<img src="<?php echo $result['cover'];?>" height="100%" />
 </div>
 <a href="./change_profile_html.php"><button> change profile picture</button></a>
 <a href="./change_cover_html.php"><button> change cover picture </button></a>

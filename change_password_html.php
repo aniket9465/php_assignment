@@ -1,6 +1,12 @@
 <?php
 if($_SERVER['REQUEST_METHOD'] === 'POST'){
 echo var_dump($_REQUEST);
+
+if(!$_REQUEST["npassword"])
+{header("location:http://192.168.121.187:8001/php_assign/aniket/change_password_html.php");
+die();
+}
+
 session_start();
    try
       {

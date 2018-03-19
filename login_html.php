@@ -41,7 +41,7 @@ $_SESSION["username"]=$_COOKIE["remember_me"];
             header("Location: http://192.168.121.187:8001/php_assign/aniket/profile_php.php");
                      die();
            }else
-           { header("Location: http://192.168.121.187:8001/php_assign/aniket/login_php.php");
+           { header("Location: http://192.168.121.187:8001/php_assign/aniket/login_html.php");
                                 die();
            }
          }
@@ -54,6 +54,10 @@ $_SESSION["username"]=$_COOKIE["remember_me"];
 else{
 session_start();
 error_reporting(E_ERROR | E_PARSE);
+if($_SESSION["username"])
+{  header("Location: http://192.168.121.187:8001/php_assign/aniket/profile_php.php");
+                         die();
+}
 if(isset($_COOKIE["remember_me"]))
 if($_COOKIE["remember_me"]!="nocookie")
 {

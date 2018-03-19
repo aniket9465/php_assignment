@@ -2,16 +2,26 @@
 
 if($_SERVER['REQUEST_METHOD'] === 'POST')
 {
-
+$v=1;
   echo var_dump($_REQUEST);
   session_start();
      try
           {
-                     $conn=new PDO("mysql:host=192.168.121.187;dbname=first_year_db","first_year","first_year");
-                              $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-                       $params=array(":name" => $_REQUEST["name"],":username"=>$_SESSION["username"],":email"=>$_REQUEST["email"],":number"=>$_REQUEST["number"],":gender"=>$_REQUEST["gender"]);
-                                                $result=$conn->prepare('update aniket_php_profiles set name=:name,mobile=:number,email=:email,gender=:gender where username=:username');
-                                                         $result->execute($params);
+    if(!preg_match("/^([a-z0-9\+_\-]+)(\.[a-z0-9\+_\-]+)*@([a-z0-9\-]+\.)+[a-z]{2,6}$/ix",$_REQUEST["email"]))
+         { $v=0;echo "5";}
+        if(!preg_match("/^(\+91|0){0,1}[987]{1}[0-9]{9}$/",$_REQUEST["number"]))
+         { $v=0;echo "4";}
+        if($_REQUEST["name"]=="")
+            {    echo "1";    $v=0;}
+if($v==0){
+header("location:http://192.168.121.187:8001/php_assign/aniket/edit_profile_html.php");
+        exit();}
+
+         $conn=new PDO("mysql:host=192.168.121.187;dbname=first_year_db","first_year","first_year");
+         $conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+         $params=array(":name" => $_REQUEST["name"],":username"=>$_SESSION["username"],":email"=>$_REQUEST["email"],":number"=>$_REQUEST["number"],":gender"=>$_REQUEST["gender"]);
+         $result=$conn->prepare('update aniket_php_profiles set name=:name,mobile=:number,email=:email,gender=:gender where username=:username');
+         $result->execute($params);
                                                              }
        catch(Exception $e)
              {
